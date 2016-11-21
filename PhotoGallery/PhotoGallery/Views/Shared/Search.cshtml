@@ -1,0 +1,13 @@
+﻿
+@using (Html.BeginForm("Search", "Search", FormMethod.Post, new { @class = "navbar-right",@style="padding-right:10px; padding-top:10px",id="searchForm" }))
+{
+    <ul class="navbar navbar-nav navbar-right">
+        <li>
+            <input type="text" name="keyWord" />
+            <input type="hidden" value="@HttpContext.Current.Request.Url.AbsoluteUri" name="returnUrl" />
+            <a href="javascript:document.getElementById('searchForm').submit()"><span class="glyphicon glyphicon-search"></span></a>
+        </li>        
+    </ul>
+}
+
+

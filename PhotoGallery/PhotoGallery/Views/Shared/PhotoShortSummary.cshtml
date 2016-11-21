@@ -1,0 +1,14 @@
+﻿@model PhotoShortViewModel
+
+<div class="row text-center">
+    <a href="@Url.Action("ViewPhoto", "Photo",
+    new { uniqueUserName = Model.UniqueUserName, photoName = Model.PhotoName })">
+        <img class="img-thumbnail" width="300" height="300" alt="@Model.PhotoName"
+             title="@Model.PhotoName"
+             src="@Html.GetImageSource(Model.ImageData,Model.ImageMimeType)" />
+    </a>
+</div>
+
+<div class="row text-center">
+        <strong>@Model.PhotoName</strong>
+</div>

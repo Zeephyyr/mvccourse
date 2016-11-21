@@ -1,0 +1,105 @@
+﻿@model PhotoViewModel
+
+@{
+    ViewBag.Title = "ViewPhoto";
+}
+
+<h2>View Photo</h2>
+
+@Html.Hidden("Rate", Model.Rating)
+@Html.Hidden("IsRatedByCurrent", Model.IsRatedByCurrent)
+
+<script>
+    function onRateClick()
+    {
+        $.ajax({
+            url: "/Photo/RatePhoto",
+            type: 'POST',
+            data: {"PhotoName":"@Model.PhotoName","UniqueUserName":"@Model.UniqueUserName","CurrentUserName":"@ViewBag.CurrentUniqueUserName"},
+            dataType: 'json',
+            success: function (data) {
+                changeRate(data);
+            },
+            error: function(){ alert("error")}
+        });
+    }
+
+    function changeRate(rating) {
+        rating = JSON.parse(rating);
+
+        var noRateClass = "glyphicon glyphicon-star-empty";
+        var rateClass = "glyphicon glyphicon-star"
+
+        $("#rating").text(rating.Rating);
+        if(rating.IsRated)
+        {
+            $("#rateIcon").removeClass(noRateClass).addClass(rateClass);
+        }
+        else
+        {
+            $("#rateIcon").removeClass(rateClass).addClass(noRateClass);
+        }
+    }
+</script>
+
+<div class="container">
+    @if (ViewBag.ResultMessage != null)
+    {
+        <div class="row">
+            @ViewBag.ResultMessage
+            <br />
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <div class="row">
+                <a href="@Url.Action("ViewFullSize", "Photo",new { photoName=Model.PhotoName,uniqueUserName=Model.UniqueUserName })">
+                    <img class="img-thumbnail" height="800"
+                         src="@Html.GetImageSource(Model.MidSizeImageData,Model.ImageMimeType)" />
+                </a>
+            </div>
+            <div class="row">
+                @if (Model.UniqueUserName == ViewBag.CurrentUniqueUserName)
+                {
+                    @Html.ActionLink("Edit Photo Page", "EditPhotoPage",
+                                 new { photoName = Model.PhotoName, uniqueUserName = Model.UniqueUserName },
+                                 new { @class = "btn btn-default", @style = "color:black" })
+                }
+                else if(User.Identity.IsAuthenticated)
+                {
+                    if (Model.IsRatedByCurrent)
+                    {
+                        <button id="unrateBt" class="btn btn-default" onclick="onRateClick()">
+                            <i id="rateIcon" class="glyphicon glyphicon-star"></i>
+                        </button>
+                    }
+                    else
+                    {
+                        <button id="rateBt" class="btn btn-default" onclick="onRateClick()">
+                            <i id="rateIcon" class="glyphicon glyphicon-star-empty"></i>
+                        </button>
+                    }
+                }
+            </div>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Name</strong> - @Model.PhotoName</p>
+            <p><strong>About:</strong> @Model.Description</p>
+            <p><strong>Created</strong> - @Model.CreationDate.ToString("MM/dd/yyyy")</p>
+            <p><strong>Uploaded</strong> - @Model.UploadDate</p>
+            <p><strong>Place</strong> - @Model.Place</p>
+            <p><strong>Camera</strong> - @Model.CameraModel</p>
+            <p><strong>Lens Focus</strong> - @Model.LensFocus</p>
+            <p><strong>Shutter Speed</strong> - @Model.ShutterSpeed</p>
+            <p><strong>Diaphragm</strong> - @Model.Diaphragm</p>
+            <p><strong>Flash</strong> - @Html.DisplayFor(m => m.Flash)</p>
+            <p><strong id="rating">@Model.Rating</strong> <span class="glyphicon glyphicon-heart"></span></p>
+            @if (!string.IsNullOrEmpty(Model.ISO))
+            {
+                <p><strong>ISO</strong> - @Model.ISO</p>
+            }
+        </div>
+    </div>
+</div>
+
+

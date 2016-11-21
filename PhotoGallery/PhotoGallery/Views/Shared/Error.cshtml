@@ -1,0 +1,21 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<br/>
+
+<div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    @if (!string.IsNullOrEmpty(Model))
+    {
+        <h7>@Model</h7>
+    }
+    else
+    {
+        <h7>Oooops.. something went wrong</h7>
+    }
+    <a href="~/Home/Index" class="glyphicon glyphicon-trash"></a>
+</div>

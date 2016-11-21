@@ -1,0 +1,3 @@
+﻿@model FullSizeViewModel
+
+<img src="@Url.Action("GetImg",new { photoName=Model.PhotoName, uniqueUserName = Model.UniqueUserName, size=RequiredImgSize.Source })" />

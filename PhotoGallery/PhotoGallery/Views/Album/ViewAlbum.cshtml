@@ -1,0 +1,68 @@
+﻿@model AlbumViewModel
+@{
+    ViewBag.Title = "ViewAlbum";
+    int startIndex = 0;
+}
+
+<div class="container">
+    @if (ViewBag.ResultMessage!=null)
+    {
+        <div class="row">
+            @ViewBag.ResultMessage
+        </div>
+    }
+    @if (Model.PagingInfo.CurrentPage == 1)
+    {
+        <div class="row">
+            <h2>Album Info</h2>
+            <div class="col-md-3">
+                <img src="@Html.GetImageSource(Model.AlbumInfo.ImageData,Model.AlbumInfo.ImageMimeType)" style="height:100px" />
+            </div>
+            <div class="col-md-3">
+                <p><strong>Name</strong>: @Model.AlbumInfo.AlbumName</p>
+                <p><strong>Description</strong>: @Model.AlbumInfo.Description</p>
+                <p><strong>Creation Date</strong>: @Model.AlbumInfo.CreationDate</p>
+            </div>
+        </div>
+        <div class="row">
+            @if (Model.AlbumInfo.UniqueUserName == ViewBag.CurrentUniqueUserName)
+            {
+                @Html.ActionLink("Edit Album", "EditAlbum", new { albumName = Model.AlbumInfo.AlbumName, uniqueUserName = Model.AlbumInfo.UniqueUserName })
+            }
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Photos</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @if (Model.Photos != null && Model.Photos.Count > 0)
+            {
+                for (; startIndex < Model.Photos.Count; startIndex += 3)
+                {
+                    <div class="row" style="padding-bottom:10px; padding-top:10px">
+                        @for (int i = 0; i < 3 && i + startIndex < Model.Photos.Count; i++)
+                    {
+                            <div class="col-sm-4">
+                                @Html.Partial("PhotoShortSummary", Model.Photos[i + startIndex])
+                            </div>
+                        }
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            @Html.PageLinks(Model.PagingInfo, x => Url.Action("ViewAlbum",
+           new
+           {
+               uniqueUserName = Model.AlbumInfo.UniqueUserName,
+               albumName = Model.AlbumInfo.AlbumName, limit = 9, offset = x
+           }))
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+﻿@model bool
+@{
+    ViewBag.Title = "PremiumInfo";
+}
+
+<h2>Premium Info</h2>
+
+@if(!Model)
+{
+    using (Html.BeginForm("ActivatePremium", "Manage"))
+    {
+        <input type="submit" class="btn btn-primary" value="Activate" />
+    }
+}
+else
+{
+    using (Html.BeginForm("DeactivatePremium", "Manage"))
+    {
+        <input type="submit" class="btn btn-primary" value="Deactivate" />
+    }
+}

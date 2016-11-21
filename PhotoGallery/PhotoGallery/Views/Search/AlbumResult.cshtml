@@ -1,0 +1,12 @@
+﻿@model AlbumShortViewModel
+
+<div class="row">
+    <div class="col-md-6">
+        <a href="@Url.Action("ViewAlbum", "Album",
+                        new { uniqueUserName = Model.UniqueUserName, albumName = Model.AlbumName })">
+            <img class="img-thumbnail" height="100"
+                 src="@Html.GetImageSource(Model.ImageData, Model.ImageMimeType)" />
+        </a>
+        <p>Album called "@Model.AlbumName" created by @Model.UniqueUserName</p>
+    </div>
+</div>

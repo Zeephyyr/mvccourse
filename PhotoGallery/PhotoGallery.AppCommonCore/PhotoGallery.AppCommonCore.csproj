@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A8EA77DE-6D9C-4E4C-852D-2697E1E32A5D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PhotoGallery.AppCommonCore</RootNamespace>
+    <AssemblyName>PhotoGallery.AppCommonCore</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Contracts\DataAccess\IRepository.cs" />
+    <Compile Include="Contracts\DataAccess\ISearchRepository.cs" />
+    <Compile Include="Contracts\Services\IAlbumService.cs" />
+    <Compile Include="Contracts\Services\IPhotoService.cs" />
+    <Compile Include="Contracts\Services\ISearchService.cs" />
+    <Compile Include="Contracts\Services\IUserService.cs" />
+    <Compile Include="Entities\Album\Album.cs" />
+    <Compile Include="Entities\Album\AlbumBase.cs" />
+    <Compile Include="Entities\Album\AlbumInfo.cs" />
+    <Compile Include="Entities\Album\AlbumRequest.cs" />
+    <Compile Include="Entities\Album\AlbumResult.cs" />
+    <Compile Include="Entities\Album\AlbumShort.cs" />
+    <Compile Include="Entities\Album\AllUsersAlbums.cs" />
+    <Compile Include="Entities\Album\UpdateAlbum.cs" />
+    <Compile Include="Entities\Photo\ImageData.cs" />
+    <Compile Include="Entities\Photo\Photo.cs" />
+    <Compile Include="Entities\Photo\PhotoBase.cs" />
+    <Compile Include="Entities\Photo\PhotoShort.cs" />
+    <Compile Include="Entities\Photo\RatingData.cs" />
+    <Compile Include="Entities\Photo\UpdatePhoto.cs" />
+    <Compile Include="Entities\Photo\UsersWall.cs" />
+    <Compile Include="Entities\RequestEntity.cs" />
+    <Compile Include="Entities\Search\Request\ExtendedAlbumSearchRequest.cs" />
+    <Compile Include="Entities\Search\Request\ExtendedPhotoSearchRequest.cs" />
+    <Compile Include="Entities\Search\Request\ExtendedUserSearchRequest.cs" />
+    <Compile Include="Entities\Search\Result\SearchResult.cs" />
+    <Compile Include="Entities\User\User.cs" />
+    <Compile Include="Entities\User\UserBase.cs" />
+    <Compile Include="Entities\User\UserShort.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PhotoGallery.Common\PhotoGallery.Common.csproj">
+      <Project>{C1C7B2EC-AA03-423C-8F01-0D391E286132}</Project>
+      <Name>PhotoGallery.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,46 @@
+﻿@model ExtendedPhotoSearchViewModel
+
+@{
+    ViewBag.Title = "ExtendedPhotoSearch";
+}
+
+<h2>Extended Photo Search</h2>
+
+<div class="container">
+    <div class="col-md-4">
+        <div class="row">
+            @using (Html.BeginForm("ExtendedPhotoSearch", "Search", FormMethod.Post))
+            {
+                <div class="panel-body">
+                    @foreach (var property in ViewData.ModelMetadata.Properties)
+                    {
+                        <label>@(property.DisplayName ?? property.PropertyName)</label>
+                        if (property.PropertyName == "Diaphragm")
+                        {
+                            <div class="form-group">
+                                @Html.DropDownListFor(x => x.Diaphragm, new SelectList(Enum.GetNames(typeof(SearchDiaphragmType))), new { @class = "form-control" })
+                            </div>
+                        }
+                        else if (property.PropertyName == "Flash")
+                        {
+                            <div class="form-group">
+                                <label>@Html.RadioButton("FlashStub", "null",new { @checked=true}) Not chosen</label>
+                                <label>@Html.RadioButton("FlashStub", "true") With flash</label>
+                                <label>@Html.RadioButton("FlashStub", "false") Without flash</label>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-group">
+                                @Html.TextBox(property.PropertyName, null,
+                                    new { @class = "form-control" })
+                            </div>
+                                }
+                        @Html.ValidationMessage(property.PropertyName)
+                                }
+                    <input type="submit" class="btn btn-default" value="Search for photo" />
+                </div>
+            }
+        </div>
+    </div>
+</div>

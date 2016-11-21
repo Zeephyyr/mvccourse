@@ -1,0 +1,8 @@
+﻿@model RemovePhotoViewModel
+
+@using (Html.BeginForm("RemovePhoto", "Photo", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.PhotoName);
+    @Html.HiddenFor(m => m.UniqueUserName);
+    <input type="submit" value="Remove" class = "btn btn-default col-md-4"/>
+}

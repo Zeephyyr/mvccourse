@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "ExtendedSearchResult";
+    ExtendedSearchType type = ViewBag.SearchType;
+}
+
+<h2>Extended Search Result</h2>
+
+<div class="container">
+    <div class="col-md-6">
+        @switch (type)
+        {
+            case ExtendedSearchType.User:
+                foreach (UserShortViewModel user in ViewBag.Result)
+                {
+                    @Html.Partial("UserResult", user)
+                }
+                break;
+            case ExtendedSearchType.Album:
+                foreach (AlbumShortViewModel album in ViewBag.Result)
+                {
+                    @Html.Partial("AlbumResult", album)
+                }
+                break;
+            case ExtendedSearchType.Photo:
+                foreach (PhotoShortViewModel photo in ViewBag.Result)
+                {
+                    @Html.Partial("PhotoResult", photo)
+                }
+                break;
+        }
+    </div>
+</div>

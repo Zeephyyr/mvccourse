@@ -1,0 +1,28 @@
+﻿@model AllAlbumsShortViewModel
+@{
+    ViewBag.Title = "UserAlbums";
+}
+
+<h2>Albums</h2>
+
+<div class="container">
+    @if(ViewBag.ResultMessage!=null)
+    {
+        <div class="row">
+            @ViewBag.ResultMessage
+        </div>
+    }
+    <div class="col-md-12">
+        @foreach (var album in Model.Albums)
+        {
+            <div class="col-md-4  text-center">
+                <a href="@Url.Action("ViewAlbum",new { uniqueUserName=album.UniqueUserName,albumName=album.AlbumName})">
+                    <img class="img-thumbnail" height="400"
+                         src="@Html.GetImageSource(album.ImageData,album.ImageMimeType)" />
+                </a>
+                <strong>@album.AlbumName</strong>
+            </div>
+        }
+
+    </div>
+</div>

@@ -1,0 +1,61 @@
+﻿@model UpdateAlbumViewModel
+
+@{
+    ViewBag.Title = "UpdateAlbum";
+}
+
+<h2>Update Album</h2>
+
+<div class="container">
+    @using (Html.BeginForm("UpdateAlbum", "Album",FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+        <div class="panel-body">
+
+            @Html.HiddenFor(m => m.AlbumId)
+            @Html.HiddenFor(m=>m.UniqueUserName)
+
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.AlbumName)
+                        @Html.TextBoxFor(m => m.AlbumName, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Description)
+                        @Html.TextAreaFor(m => m.Description,new { @class = "form-control", rows = 5 })
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <img src="@Html.GetImageSource(Model.ImageData,Model.ImageMimeType)" style="height:300px" />
+
+                    <div class="form-group">
+                        <div style="position:relative;">
+                            <label>Image</label>
+                            <a class='btn' href='javascript:;'>
+                                Choose File...
+                                <input type="file" name="Image" size="40"
+                                       style="position:absolute;z-index:2;top:0;
+                                    left:0,filter: alpha(opacity=0);opacity:0;
+                                    background-color:transparent; color:transparent;"
+                                       onchange='$("#upload-file-info").html($(this).val());'>
+                            </a>
+                            <span class='label label-info' id="upload-file-info"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <input type="submit" value="Update" class="btn" />
+    }
+</div>

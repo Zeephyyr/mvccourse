@@ -1,0 +1,12 @@
+﻿@model UserShortViewModel
+
+<div class="row">
+    <div class="col-md-12">
+
+            <a href="@Url.Action("ViewWall", "Photo",new { uniqueUserName = Model.UniqueUserName })">
+                <span class="glyphicon glyphicon-home"> @Model.Name also known as @Model.UniqueUserName</span>
+            </a> 
+
+        
+    </div>
+</div>

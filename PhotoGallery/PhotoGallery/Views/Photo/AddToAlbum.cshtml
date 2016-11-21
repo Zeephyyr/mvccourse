@@ -1,0 +1,32 @@
+﻿@model AllAlbumsShortViewModel
+@{
+    ViewBag.Title = "AddToAlbum";
+}
+
+<h2>Add To Album</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @foreach (var album in Model.Albums)
+            {
+                <div class="col-md-4">
+                    <strong>@album.AlbumName</strong>
+                    @using (Html.BeginForm("AddToAlbum", "Photo", new AddPhotoToAlbumViewModel
+                    {
+                        PhotoName = ViewBag.PhotoName,
+                        UniqueUserName=ViewBag.UniqueUserName,
+                        AlbumName = album.AlbumName
+                    }))
+                    {
+                        <button type="submit"><img class="img-thumbnail"
+                                    src="@Html.GetImageSource(album.ImageData,album.ImageMimeType)" /></button>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+

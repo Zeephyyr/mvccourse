@@ -1,0 +1,54 @@
+﻿@model SearchResultViewModel
+
+@{
+    ViewBag.Title = "SearchResult";
+}
+
+<h2>Search Results</h2>
+
+<div class="container">
+    <div class="col-md-6">
+        <div class="row">
+            @if (Model.Photos != null && Model.Photos.Count > 0)
+            {
+                <h3>Photos</h3>
+                foreach (var photo in Model.Photos)
+                {
+                    @Html.Partial("PhotoResult",photo)
+                }
+            }
+        </div>
+
+        <hr />
+
+        <div class="row">
+            @if (Model.Albums != null && Model.Albums.Count > 0)
+            {
+                <h3>Albums</h3>
+                foreach (var album in Model.Albums)
+                {
+                    @Html.Partial("AlbumResult",album)
+                }
+            }
+        </div>
+
+        <hr />
+
+        <div class="row">
+            @if (Model.Users != null && Model.Users.Count > 0)
+            {
+                <h3>User</h3>
+                foreach (var user in Model.Users)
+                {
+                    @Html.Partial("UserResult",user)
+                }
+            }
+        </div>
+    </div>
+    <div class="col-md-6">
+        Didn't find what you've expected? Try our extended search
+        <br/>
+        @Html.Partial("ExtendedSearch")
+    </div>
+</div>
+

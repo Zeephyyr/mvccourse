@@ -1,0 +1,27 @@
+﻿@model ExtendedUserSearchViewModel
+@{
+    ViewBag.Title = "ExtendedUserSearch";
+}
+
+<h2>Extended User Search</h2>
+<div class="container">
+    <div class="col-md-4">
+        <div class="row">
+            @using (Html.BeginForm("ExtendedUserSearch", "Search", FormMethod.Post))
+            {
+                <div class="panel-body">
+                    @foreach (var property in ViewData.ModelMetadata.Properties)
+                    {
+                        <div class="form-group">
+                            <label>@(property.DisplayName ?? property.PropertyName)</label>
+                            @Html.TextBox(property.PropertyName, null,
+                            new { @class = "form-control" })
+                            @Html.ValidationMessage(property.PropertyName)
+                        </div>
+                    }
+                    <input type="submit" class="btn btn-default" value="Search for user" />
+                </div>
+            }
+        </div>
+    </div>
+</div>

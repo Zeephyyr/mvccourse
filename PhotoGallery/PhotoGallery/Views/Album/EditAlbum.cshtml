@@ -1,0 +1,22 @@
+﻿@model EditAlbumViewModel
+
+@{
+    ViewBag.Title = "EditAlbum";
+}
+
+<h2>Edit Album</h2>
+
+@using (Html.BeginForm("UpdateAlbum", "Album", FormMethod.Get))
+{
+    <input type="hidden" name="albumName" value="@Model.AlbumName" />
+    <input type="hidden" name="uniqueUserName" value="@Model.UniqueUserName" />
+    <input type="submit" value="Update" class="btn" />
+}
+
+<br />
+
+@Html.Partial("RemoveAlbum", new RemoveAlbumViewModel
+{
+    AlbumName = Model.AlbumName,
+    UniqueUserName = Model.UniqueUserName
+})

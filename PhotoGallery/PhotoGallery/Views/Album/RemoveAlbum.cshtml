@@ -1,0 +1,9 @@
+﻿@model RemoveAlbumViewModel
+
+@using (Html.BeginForm("RemoveAlbum", "Album", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.AlbumName);
+    @Html.HiddenFor(m => m.UniqueUserName);
+    <input type="submit" value="Remove" class="btn" />
+}
+

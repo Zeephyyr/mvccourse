@@ -1,0 +1,26 @@
+﻿@model IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Change your account settings</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Password:</dt>
+        <dd>
+            @Html.ActionLink("Change your password", "ChangePassword")
+        </dd>
+        <dt>Personal Data:</dt>
+        <dd>
+            @Html.ActionLink("Change your personal data", "ChangeUserInfo")
+        </dd>
+        <dt>Premium</dt>
+        <dd>
+            @Html.ActionLink("Premium Info", "PremiumInfo")
+        </dd>
+    </dl>
+</div>
